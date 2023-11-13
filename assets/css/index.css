@@ -1,0 +1,9 @@
+@font-face { font-family: Disney; src: url('../fonts/waltograph.regular.ttf'); } 
+#title{
+    font-size: 200px;
+    font-family: Disney;
+}
+img {
+    height: 80px;
+    width: auto;
+  }
