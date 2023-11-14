@@ -1,0 +1,27 @@
+@font-face { font-family: Disney; src: url('../fonts/waltograph.regular.ttf'); } 
+img {
+    height: 300px;
+    width: auto;
+}
+#container{
+    border-style: solid;
+    border-width: 3px;
+    border-left-width: 2px;
+    border-right-width: 2px;
+    border-color: lightcoral;
+}
+
+h1{
+    margin-top: 0%;
+    margin-bottom: 2px;
+    font-size: large;
+}
+
+h2{
+    font-size: 48px;
+    font-family: Disney;
+}
+
+#input-field .prefix.active {
+    color: #000;
+}
