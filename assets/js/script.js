@@ -5,6 +5,10 @@
 //     instances.open();
 //   });
 
+$(document).ready(function(){
+  $('.modal').modal();
+  });
+
 var submitEl = document.querySelector("#submit");
 var input = document.querySelector("#input");
 var img = document.querySelector("#img");
