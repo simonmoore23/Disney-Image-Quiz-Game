@@ -12,6 +12,7 @@ $(document).ready(function(){
 var submitEl = document.querySelector("#submit");
 var input = document.querySelector("#input");
 var img = document.querySelector("#img");
+var img2 = document.querySelector("#img2");
 var test = 0;
 var array = ["./assets/img/download.jpg", "./assets/img/download(1).jpg", "./assets/img/download(2).jpg"];
 
@@ -20,12 +21,18 @@ function showResponse(event) {
   // Prevent default action
   event.preventDefault();
   input.value = ""
-  if(test == 2){
-    test = 0 
-  }else{
-    test ++;
-  }
-  img.src = array[test]
+  // if(test == 2){
+  //   test = 0 
+  // }else{
+  //   test ++;
+  // }
+  // img.src = array[test]
+  
+  var newCharacter = characterInOrder();
+  // img.src = newCharacter.getAttribute('image');
+  console.log(newCharacter.movie);
+  console.log(newCharacter)
+  
 }
   
 // Add listener to submit element
@@ -34,26 +41,26 @@ submitEl.addEventListener("click", showResponse);
 
 
 var characterMovieList = [
-  { characterName: "Dusty Crophopper", movieName: "Planes"},
-  { characterName: "Tigger", movieName: "The Many Adventures of Winnie the Pooh"},
-  { characterName: "Lilo", movieName: "Lilo & Stitch"},
-  // { characterName: "Pinocchio", movieName: "Pinocchio"},
-  // { characterName: "Dumbo", movieName: "Dumbo"},
-  // { characterName: "Peter Pan", movieName: "Peter Pan [1]"},
-  // { characterName: "Tinker Bell", movieName: "Peter Pan [1]"},
-  // { characterName: "Captain Hook", movieName: "Peter Pan [1]"},
-  // { characterName: "Mowgli", movieName: "The Jungle Book [1]"},
-  // { characterName: "Baloo", movieName: "Planes"},
-  // { characterName: "Ariel", movieName: "Planes"},
+  { characterName: "1540", movieName: "tt1691917"}, //Planes
+  { characterName: "6749", movieName: "tt0076363"},//The Many Adventures of Winnie the Pooh
+  { characterName: "5195", movieName: "tt0275847"},// Lilo & Stitch
+  { characterName: "5325", movieName: "tt0032910"},//Pinocchio
+  { characterName: "1975", movieName: "tt0033563"},//Dumbo
+  { characterName: "5117", movieName: "tt0046183"},//Peter Pan
+  { characterName: "6776", movieName: "tt0046183"},//Peter Pan
+  { characterName: "1044", movieName: "tt0046183"},//Peter Pan
+  { characterName: "4710", movieName: "tt0061852"}, //The Jungle Book
+  { characterName: "450", movieName: "tt2226178"}, //Baloo 
+  { characterName: "309", movieName: "tt0097757"}, //Ariel
   // { characterName: "Aladdin", movieName: "Planes"},
-  // { characterName: "Simba", movieName: "The Lion King [2]"},
-  // { characterName: "Pocahontas", movieName: "Pocahontas"},
-  // { characterName: "Flubber", movieName: "Flubber [2]"},
-  // { characterName: "Mulan", movieName: "Mulan [1]"},
-  // { characterName: "Tarzan", movieName: "Tarzan"},
-  // { characterName: "Kenai", movieName: "Brother Bear"},
-  // { characterName: "Baymax", movieName: "Big Hero 6"},
-  // { characterName: "Raya", movieName: "Raya and the Last Dragon "}
+  { characterName: "6160", movieName: "tt0110357"}, //The Lion King
+  { characterName: "5379", movieName: "tt0114148"},//Pocahontas
+  { characterName: "2389", movieName: "tt0119137"},//Flubber
+  { characterName: "2183", movieName: "tt0120762"},//Mulan
+  { characterName: "6610", movieName: "tt0120855"},//Tarzan
+  { characterName: "3631", movieName: "tt0328880"},//Brother Bear
+  { characterName: "527", movieName: "tt2245084"}, //Big Hero 6
+  { characterName: "5634", movieName: "tt5109280"} //Raya and the Last Dragon
 ]
 
 
@@ -62,12 +69,15 @@ function removeBrackets(inputString) {
   return inputString.replace(/ *\([^)]*\) */g, ''); 
 };
 
-
+var i = 0; 
 //Loop to go through each object in Array
 function characterInOrder() {
-  for (let i = 0; i < characterMovieList.length; i++){
+var characterInfo = {};
+
+  
       var currentCharacter = characterMovieList[i].characterName;
-      console.log(currentCharacter)
+      characterInfo.name = currentCharacter;
+      // console.log(currentCharacter)
       var currentMovie = characterMovieList[i].movieName;
       
 
@@ -75,7 +85,7 @@ function characterInOrder() {
       var characterImage = getCharacterData(currentCharacter.characterName);
 
       //Fetch for Movie Image from API
-      // var movieImage = getMovieData(currentCharacter.movieName);
+      var movieImage = getMovieData(currentCharacter.movieName);
 
       
 
@@ -84,7 +94,7 @@ function characterInOrder() {
       //Function to fetch for the character Image
       function getCharacterData(){
 
-          var url = 'https://api.disneyapi.dev/character?name='+currentCharacter;
+          var url = 'https://api.disneyapi.dev/character/'+currentCharacter;
           
           fetch(url, {
             method: 'GET',
@@ -95,16 +105,18 @@ function characterInOrder() {
               })
               .then(function (data) {
                   var characterImage = data.data.imageUrl;
+                  img.src = characterImage;
                   // var importedMovieName = data.data.films[1];
                   // console.log(imageSource);
                   // console.log('data:', data)
-                  console.log('CharacterImage:', characterImage);
+                  // console.log('CharacterImage:', characterImage);
+                  
               });                  
       }
-      //Function to fetch for Movie Poster
+      // Function to fetch for Movie Poster
       function getMovieData(){
           var movieName = 'Cars';
-          var url = 'https://moviesdatabase.p.rapidapi.com/titles/search/title/'+currentMovie+'?exact=true&titleType=movie';  
+          var url = 'https://moviesdatabase.p.rapidapi.com/titles/'+currentMovie;  
           var rapidApiHost = 'moviesdatabase.p.rapidapi.com';
           
           fetch(url,{
@@ -119,22 +131,19 @@ function characterInOrder() {
                   return response.json()
           })
               .then(function(data){
-                  console.log('PosterLink',data.results[0].primaryImage.url)
-          })
-      
+                  // characterInfo.movie = data.results[2].primaryImage.url;
+                  console.log('Movie Image',data.results.primaryImage.url);
+                  img2.src = data.results.primaryImage.url;
+          })     
 
 
       }    
 
 
+i++;
+console.log(characterInfo);
+return characterInfo   
 
-      
-
-
-
-
-
-  }
 }
 
-characterInOrder();
+
