@@ -30,8 +30,8 @@ function showResponse(event) {
   
   var newCharacter = characterInOrder();
   // img.src = newCharacter.getAttribute('image');
-  console.log(newCharacter.movie);
-  console.log(newCharacter)
+  // console.log(""+newCharacter.movie);
+  // console.log(newCharacter)
   
 }
   
@@ -63,13 +63,14 @@ var characterMovieList = [
   { characterName: "5634", movieName: "tt5109280"} //Raya and the Last Dragon
 ]
 
-
 //This function removes extra information about Movie names in Brackets
 function removeBrackets(inputString) {
   return inputString.replace(/ *\([^)]*\) */g, ''); 
 };
 
 var i = 0; 
+
+var firstCharacter = characterInOrder()
 //Loop to go through each object in Array
 function characterInOrder() {
 var characterInfo = {};
@@ -78,7 +79,11 @@ var characterInfo = {};
       var currentCharacter = characterMovieList[i].characterName;
       characterInfo.name = currentCharacter;
       // console.log(currentCharacter)
-      var currentMovie = characterMovieList[i].movieName;
+      if(i==0){
+        var currentMovie = characterMovieList[i].movieName;
+      }else{
+        var currentMovie = characterMovieList[i-1].movieName;
+      }
       
 
       //Fetch for Character Image from API
@@ -106,6 +111,8 @@ var characterInfo = {};
               .then(function (data) {
                   var characterImage = data.data.imageUrl;
                   img.src = characterImage;
+                  var characterName = data.data.name;
+                  console.log(characterName);
                   // var importedMovieName = data.data.films[1];
                   // console.log(imageSource);
                   // console.log('data:', data)
