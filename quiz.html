@@ -31,7 +31,10 @@
     <div class="modal" id="modal1">
         <div class="modal-content">
             <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" width="0" height="0" alt="" id="img2">
-            <p class="right" id="validation">Correct</p>
+            <div class="right white-text text-darken-4 section" id="modal-text">
+                <p id="validation"></p>
+                <p>The Corresct Answer is: <span id="correctName"></span></p>
+            </div>
         </div>
         <div class="modal-footer top right">
             <a href="#" class="modal-close btn">Close</a>
@@ -42,8 +45,8 @@
             <div class="nav-wrapper">
               <img src="./assets/img/disney-logo-disney-icon-transparent-free-png.webp" id="disney-logo" alt="Disney logo">
               <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a href="#">----</a></li>
-                <li><a href="#">----</a></li>
+                <!--<li><a href="#">----</a></li>
+                <li><a href="#">----</a></li>-->
                 <li><a href="#modal2" class="btn modal-trigger">API links</a></li>
                 <div class="modal" id="modal2">
                     <div class="modal-content">
@@ -57,8 +60,18 @@
               </ul>
             </div>
         </nav>
-        <div class="row section">
-            <div class="col s6 offset-s3 center"><span class="flow-text white-text text-darken-4" id="title">The <br> end </span></div>
+        <div class="row section" id="end-text">
+            <div class="col s3 center flow-text white-text text-darken-4 section" id="current-score">
+                <h4>Score</h4>
+                <p><span id="score-rn"></span>/19</p>
+                <p><span id="precent-rn"></span>%</p>
+            </div>
+            <div class="col s6 center"><span class="flow-text white-text text-darken-4" id="title">The <br> end </span></div>
+            <div class="section col s3 center flow-text white-text text-darken-4" id="previous-score">
+                <h4>Previous Score</h4>
+                <p><span id="score-prev"></span>/19</p>
+                <p><span id="percent-prev"></span>%</p>
+            </div>
         </div>
         <div class="center">
             <a class="waves-effect waves-light btn-large" href="index.html">Re-start Quiz</a>

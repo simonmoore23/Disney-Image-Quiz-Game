@@ -17,7 +17,12 @@ var valid = document.querySelector('#validation');
 var modal = document.querySelector("#modal1");
 var questionNoEl = document.querySelector("#questionNo");
 var quiz = document.querySelector("#quiz");
-var endPage = document.querySelector("#end-page")
+var endPage = document.querySelector("#end-page");
+var scoreRn = document.querySelector("#score-rn");
+var percentRn = document.querySelector("#precent-rn");
+var scorePrev = document.querySelector("#score-prev");
+var percentPrev = document.querySelector("#percent-prev");
+var correctName = document.querySelector("#correctName");
 //var test = 0;
 var array = ["./assets/img/download.jpg", "./assets/img/download(1).jpg", "./assets/img/download(2).jpg"];
 var score = 0
@@ -55,7 +60,7 @@ var v = 0;
 var questionNo = 1
 //var currentCharacterImage;
 //var currentMovieImage;
-var currentCharacterName = "hello";
+var currentCharacterName;
 
 //Loop to go through each object in Array
 
@@ -76,7 +81,7 @@ function firstQuestion(){
       });
 }
 firstQuestion();
-console.log(currentCharacterName);
+
 function showResponse(event) {
   // Prevent default action
   event.preventDefault();
@@ -91,13 +96,32 @@ function showResponse(event) {
   v++;
   questionNo++;
   questionNoEl.textContent = questionNo;
-  console.log(v);
-  if(v == 18){
+  if(v == 19){
     quiz.style.display = 'none'
     endPage.style.display = 'block'
+    scoreRn.textContent = score
+    var percent = Math.round(score/19 *100)
+    var temp =percent.toString();
+    percentRn.textContent = temp;
+    localScore =renderPrevScore();
+    scorePrev.textContent = localScore;
+    if(localScore == "N/A"){
+      percentPrev.textContent = "N/A"
+    }else{
+      var percent2 = Math.round(localScore/19 * 100);
+      percentPrev.textContent = percent2;
+    }
+    localStorage.setItem("Score",score);
   }
 }
-  
+function renderPrevScore() {
+  // TODO: Retrieve the last email and password and render it to the page
+  var localScore = localStorage.getItem("Score")
+  if (!localScore) {
+    return "N/A";
+  }
+  return localScore
+}
 // Add listener to submit element
 submitEl.addEventListener("click", showResponse);
 
@@ -117,12 +141,13 @@ function getCharacterData(currentCharacter , nameOrImage){
             var characterName = (data.data.name);
             if(characterName == input.value){
               modal.className = "modal green lighten-2";
-              valid.textContent = "you are correct";
+              valid.textContent = "CORRECT";
               score ++;
             }else{
               modal.className = "modal red lighten-2";
-              valid.textContent = "you are incorrect";
+              valid.textContent = "INCORRECT";
             }
+            correctName.textContent = characterName;
             input.value = ""
           }else{
             var characterImage = data.data.imageUrl;

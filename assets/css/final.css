@@ -1,9 +1,21 @@
 @font-face { font-family: Disney; src: url('../fonts/waltograph.regular.ttf'); } 
 #title{
     font-size: 200px;
+    /*font-family: Disney;*/
+}
+#end-text{
     font-family: Disney;
+}
+#modal-text{
+    font-family: Disney;
+    font-size: 20px;
 }
 #disney-logo {
     height: 80px;
     width: auto;
   }
+
+h4{
+    font-size: 30px;
+    padding-bottom: 10px;
+}
