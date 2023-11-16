@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="./assets/css/main.css">
+    <link rel="stylesheet" href="./assets/css/final.css">
     <link rel="stylesheet" href="./assets/css/quiz.css">
 </head>
 <body class="teal lighten-2">
@@ -34,6 +35,33 @@
         </div>
         <div class="modal-footer top right">
             <a href="#" class="modal-close btn">Close</a>
+        </div>
+    </div>
+    <div style="display: none" id="end-page">
+        <nav>
+            <div class="nav-wrapper">
+              <img src="./assets/img/disney-logo-disney-icon-transparent-free-png.webp" id="disney-logo" alt="Disney logo">
+              <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="#">----</a></li>
+                <li><a href="#">----</a></li>
+                <li><a href="#modal2" class="btn modal-trigger">API links</a></li>
+                <div class="modal" id="modal2">
+                    <div class="modal-content">
+                        <a class="black-text text-darken-2" href="https://disneyapi.dev/">Disney Images API</a>
+                        <a class="black-text text-darken-2" href="https://rapidapi.com/SAdrian/api/moviesdatabase/">Movie Images API</a>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#" class="modal-close btn">Close</a>
+                    </div>
+                </div>
+              </ul>
+            </div>
+        </nav>
+        <div class="row section">
+            <div class="col s6 offset-s3 center"><span class="flow-text white-text text-darken-4" id="title">The <br> end </span></div>
+        </div>
+        <div class="center">
+            <a class="waves-effect waves-light btn-large" href="index.html">Re-start Quiz</a>
         </div>
     </div>
     <!--<img src="./assets/img/download.jpg" alt="Disney Character" id="img2">-->
