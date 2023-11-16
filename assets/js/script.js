@@ -13,14 +13,16 @@ var submitEl = document.querySelector("#submit");
 var input = document.querySelector("#input");
 var img = document.querySelector("#img");
 var img2 = document.querySelector("#img2");
-var test = 0;
+var valid = document.querySelector('#validation')
+//var test = 0;
 var array = ["./assets/img/download.jpg", "./assets/img/download(1).jpg", "./assets/img/download(2).jpg"];
-
+var score = 0
 // Action to be performed on click store in named function
 function showResponse(event) {
   // Prevent default action
   event.preventDefault();
-  input.value = ""
+  var newCharacter = characterInOrder();
+  //input.value = ""
   // if(test == 2){
   //   test = 0 
   // }else{
@@ -28,10 +30,10 @@ function showResponse(event) {
   // }
   // img.src = array[test]
   
-  var newCharacter = characterInOrder();
+  //var newCharacter = characterInOrder();
   // img.src = newCharacter.getAttribute('image');
   // console.log(""+newCharacter.movie);
-  // console.log(newCharacter)
+  //console.log(newCharacter.name)
   
 }
   
@@ -70,86 +72,98 @@ function removeBrackets(inputString) {
 
 var i = 0; 
 
-var firstCharacter = characterInOrder()
+//var firstCharacter = characterInOrder()
 //Loop to go through each object in Array
 function characterInOrder() {
-var characterInfo = {};
+  var characterInfo = {};
 
   
-      var currentCharacter = characterMovieList[i].characterName;
-      characterInfo.name = currentCharacter;
-      // console.log(currentCharacter)
-      if(i==0){
-        var currentMovie = characterMovieList[i].movieName;
-      }else{
-        var currentMovie = characterMovieList[i-1].movieName;
-      }
+  var currentCharacter = characterMovieList[i].characterName;
+  //characterInfo.name = currentCharacter;
+  // console.log(currentCharacter)
+  if(i==0){
+    var currentMovie = characterMovieList[i].movieName;
+  }else{
+    var currentMovie = characterMovieList[i-1].movieName;
+  }
+  
+
+  // //Fetch for Character Image from API
+  // var characterImage = getCharacterData(currentCharacter.characterName);
+  // console.log(characterImage)
+  // //Fetch for Movie Image from API
+  // var movieImage = getMovieData(currentCharacter.movieName);
+
+  // var characterName;
+
+  
+  // console.log('Movie', movieImage);
+  //Function to fetch for the character Image
+  function getCharacterData(currentCharacter){
+
+      var url = 'https://api.disneyapi.dev/character/'+currentCharacter;
       
+      fetch(url, {
+        method: 'GET',
+        
+      })
+          .then(function (response) {
+              return response.json();
+          })
+          .then(function (data) {
+              var characterImage = data.data.imageUrl;
+              img.src = characterImage;
+              var characterName = (data.data.name);
+              console.log(input.value);
+              console.log(characterName);
+              if(characterName == input.value){
+                valid.textContent = "you are correct"
+              }else{
+                valid.textContent = "you are incorrect"
+              }
+              input.value = ""
 
-      //Fetch for Character Image from API
-      var characterImage = getCharacterData(currentCharacter.characterName);
-
-      //Fetch for Movie Image from API
-      var movieImage = getMovieData(currentCharacter.movieName);
-
+              //console.log(characterName);
+              // var importedMovieName = data.data.films[1];
+              // console.log(imageSource);
+              // console.log('data:', data)
+              // console.log('CharacterImage:', characterImage);
+              
+          }); 
+      //console.log(characterName);                     
+  }
+  getCharacterData(currentCharacter);
+  // Function to fetch for Movie Poster
+  function getMovieData(currentMovie){
+      var movieName = 'Cars';
+      var url = 'https://moviesdatabase.p.rapidapi.com/titles/'+currentMovie;  
+      var rapidApiHost = 'moviesdatabase.p.rapidapi.com';
       
-
-      
-      // console.log('Movie', movieImage);
-      //Function to fetch for the character Image
-      function getCharacterData(){
-
-          var url = 'https://api.disneyapi.dev/character/'+currentCharacter;
-          
-          fetch(url, {
-            method: 'GET',
-            
-          })
-              .then(function (response) {
-                  return response.json();
-              })
-              .then(function (data) {
-                  var characterImage = data.data.imageUrl;
-                  img.src = characterImage;
-                  var characterName = data.data.name;
-                  console.log(characterName);
-                  // var importedMovieName = data.data.films[1];
-                  // console.log(imageSource);
-                  // console.log('data:', data)
-                  // console.log('CharacterImage:', characterImage);
-                  
-              });                  
-      }
-      // Function to fetch for Movie Poster
-      function getMovieData(){
-          var movieName = 'Cars';
-          var url = 'https://moviesdatabase.p.rapidapi.com/titles/'+currentMovie;  
-          var rapidApiHost = 'moviesdatabase.p.rapidapi.com';
-          
-          fetch(url,{
-              method:'GET',
-              headers:{
-                  'X-RapidAPI-Host': rapidApiHost,
-                  'X-RapidAPI-Key': 'e75fa08f12mshdeaa96450c2a0f2p103cc2jsn84b52f82c0ae',  
-                  'Content-Type': 'application/json',
-              },
-          })
-              .then(function (response){
-                  return response.json()
-          })
-              .then(function(data){
-                  // characterInfo.movie = data.results[2].primaryImage.url;
-                  console.log('Movie Image',data.results.primaryImage.url);
-                  img2.src = data.results.primaryImage.url;
-          })     
+      fetch(url,{
+          method:'GET',
+          headers:{
+              'X-RapidAPI-Host': rapidApiHost,
+              'X-RapidAPI-Key': 'e75fa08f12mshdeaa96450c2a0f2p103cc2jsn84b52f82c0ae',  
+              'Content-Type': 'application/json',
+          },
+      })
+          .then(function (response){
+              return response.json()
+      })
+          .then(function(data){
+              // characterInfo.movie = data.results[2].primaryImage.url;
+              //console.log('Movie Image',data.results.primaryImage.url);
+              img2.src = data.results.primaryImage.url;
+      })     
 
 
-      }    
+  }    
+  getMovieData(currentMovie);
 
-
-i++;
-console.log(characterInfo);
-return characterInfo   
+  //console.log(characterInfo)
+  i++;
+  //console.log(characterInfo);
+  return characterInfo;  
 
 }
 

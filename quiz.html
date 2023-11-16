@@ -10,8 +10,8 @@
     <link rel="stylesheet" href="./assets/css/quiz.css">
 </head>
 <body class="teal lighten-2">
-    <div class="mainquiz">
-        <h1 class="white-text text-darken-2">Question <span>#</span></h1>
+    <div class="mainquiz" id="quiz">
+        <h1 class="white-text text-darken-2">Question <span id="questionNo">1</span></h1>
         <div class="container center" id="container">
             <h2 class="white-text text-darken-2" id="Question">What is the name of this Character?</h2>
             <!--<img src="./assets/img/download.jpg" alt="Disney Character" id="img">-->
@@ -29,8 +29,8 @@
     <!--<li><a href="#modal1" class="btn modal-trigger">API links</a></li>-->
     <div class="modal" id="modal1">
         <div class="modal-content">
-            <img src="./assets/img/download.jpg" alt="Disney Character" id="img2">
-            <p class="right">Correct</p>
+            <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" width="0" height="0" alt="" id="img2">
+            <p class="right" id="validation">Correct</p>
         </div>
         <div class="modal-footer top right">
             <a href="#" class="modal-close btn">Close</a>
@@ -39,6 +39,6 @@
     <!--<img src="./assets/img/download.jpg" alt="Disney Character" id="img2">-->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="./assets/js/script.js"></script>
+    <script src="./assets/js/script2.js"></script>
 </body>
 </html>
