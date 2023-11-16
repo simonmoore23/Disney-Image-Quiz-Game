@@ -1,14 +1,9 @@
-
-// document.addEventListener('DOMContentLoaded', function() {
-//     var elems = document.querySelectorAll('.modal');
-//     var instances = M.Modal.init(elems, options);
-//     instances.open();
-//   });
-
+//Function for Modal
 $(document).ready(function(){
   $('.modal').modal();
-  });
+});
 
+//Selected HTML tags stored into variables
 var submitEl = document.querySelector("#submit");
 var input = document.querySelector("#input");
 var img = document.querySelector("#img");
@@ -18,10 +13,10 @@ var modal = document.querySelector("#modal1");
 var questionNoEl = document.querySelector("#questionNo");
 var quiz = document.querySelector("#quiz");
 var endPage = document.querySelector("#end-page")
-//var test = 0;
 var array = ["./assets/img/download.jpg", "./assets/img/download(1).jpg", "./assets/img/download(2).jpg"];
 var score = 0
 
+//Array of Objects that contain the Disney Character and corresponding Movie Name
 var characterMovieList = [
   { characterName: "1540", movieName: "tt1691917"},//Planes
   { characterName: "6749", movieName: "tt0076363"},//The Many Adventures of Winnie the Pooh
@@ -45,20 +40,13 @@ var characterMovieList = [
   { characterName: "5634", movieName: "tt5109280"} //Raya and the Last Dragon
 ]
 
-//This function removes extra information about Movie names in Brackets
-// function removeBrackets(inputString) {
-//   return inputString.replace(/ *\([^)]*\) */g, ''); 
-// };
-
+//Global variable for loop and Questions
 var i = 0; 
 var v = 0;
 var questionNo = 1
-//var currentCharacterImage;
-//var currentMovieImage;
 var currentCharacterName = "hello";
 
-//Loop to go through each object in Array
-
+//Function that ensures 1st image of the quiz from array taken is preloaded
 function firstQuestion(){
   var url = 'https://api.disneyapi.dev/character/'+characterMovieList[0].characterName;
   
@@ -75,8 +63,13 @@ function firstQuestion(){
           //currentCharacterName = data.data.name;
       });
 }
+//Calls Function
 firstQuestion();
+
+//Logs Variable onto Console
 console.log(currentCharacterName);
+
+//Function loops through Array until question 18
 function showResponse(event) {
   // Prevent default action
   event.preventDefault();
@@ -101,6 +94,7 @@ function showResponse(event) {
 // Add listener to submit element
 submitEl.addEventListener("click", showResponse);
 
+//Function Fetches for Character Image/Name and determines whether input matches response
 function getCharacterData(currentCharacter , nameOrImage){
 
   var url = 'https://api.disneyapi.dev/character/'+currentCharacter;
