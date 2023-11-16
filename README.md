@@ -31,12 +31,12 @@ WHEN the README is accessed
 THEN the README should have a unique name, description, list of tech used, screenshots and links to the deployed website.
 
 
-Deployed URL: https://simonmoore23.github.io/project-1-team-6/
+Deployed URL: https://simonmoore23.github.io/Disney-Image-Quiz-Game/    
 GitHub Repo URL: https://github.com/simonmoore23/project-1-team-6   
 
 #### Description
 
-- Our motivation for this project was to create a fun game that people can use during their downtime to reminisce about their favourite Disney characters or learn about films they did not know about.
+- Our motivation for this project was to create a fun game that people can play during their downtime to reminisce about their favourite Disney characters or learn about films they did not know about.
 - We are building this project so the world has a place to go to and play a fun game about Disney.
 - This tool will help make the world a better place by having a little bit of fun rather than reading about the atrocities on the news.
 - Whilst working on this project we hope to learn about working as a team on GitHub and creating a product that is lighthearted and enjoyable.
