@@ -1,14 +1,9 @@
-
-// document.addEventListener('DOMContentLoaded', function() {
-//     var elems = document.querySelectorAll('.modal');
-//     var instances = M.Modal.init(elems, options);
-//     instances.open();
-//   });
-
+// Initialize modals on elements with the 'modal' class when the document is ready
 $(document).ready(function(){
   $('.modal').modal();
-  });
+});
 
+// Select corresponding Elements from HTML
 var submitEl = document.querySelector("#submit");
 var input = document.querySelector("#input");
 var img = document.querySelector("#img");
@@ -23,10 +18,10 @@ var percentRn = document.querySelector("#precent-rn");
 var scorePrev = document.querySelector("#score-prev");
 var percentPrev = document.querySelector("#percent-prev");
 var correctName = document.querySelector("#correctName");
-//var test = 0;
 var array = ["./assets/img/download.jpg", "./assets/img/download(1).jpg", "./assets/img/download(2).jpg"];
 var score = 0
 
+//Array of Objects containing Character and Movie ID's
 var characterMovieList = [
   { characterName: "1540", movieName: "tt1691917"},//Planes
   { characterName: "6749", movieName: "tt0076363"},//The Many Adventures of Winnie the Pooh
@@ -39,7 +34,6 @@ var characterMovieList = [
   { characterName: "4710", movieName: "tt0061852"}, //The Jungle Book
   { characterName: "450", movieName: "tt2226178"}, //Baloo 
   { characterName: "309", movieName: "tt0097757"}, //Ariel
-  // { characterName: "Aladdin", movieName: "Planes"},
   { characterName: "6160", movieName: "tt0110357"}, //The Lion King
   { characterName: "5379", movieName: "tt0114148"},//Pocahontas
   { characterName: "2389", movieName: "tt0119137"},//Flubber
@@ -50,20 +44,13 @@ var characterMovieList = [
   { characterName: "5634", movieName: "tt5109280"} //Raya and the Last Dragon
 ]
 
-//This function removes extra information about Movie names in Brackets
-// function removeBrackets(inputString) {
-//   return inputString.replace(/ *\([^)]*\) */g, ''); 
-// };
-
+//Variables for loop 
 var i = 0; 
 var v = 0;
 var questionNo = 1
-//var currentCharacterImage;
-//var currentMovieImage;
 var currentCharacterName;
 
-//Loop to go through each object in Array
-
+//Function to fetch Character and preload image for 1st Image 
 function firstQuestion(){
   var url = 'https://api.disneyapi.dev/character/'+characterMovieList[0].characterName;
   
@@ -80,42 +67,66 @@ function firstQuestion(){
           //currentCharacterName = data.data.name;
       });
 }
+
+//Calls Function
 firstQuestion();
 
+//Function to go through each object in Array and retrieve Character and Movie
 function showResponse(event) {
   // Prevent default action
   event.preventDefault();
   var currentCharacterId = characterMovieList[i].characterName;
   getCharacterData(characterMovieList[i].characterName, 1);
+
+  // If the index 'i' is less than 18, fetch character data for the next character in the list
   if(i<18){
     i++;
     getCharacterData(characterMovieList[i].characterName, 2);
   }
+
+  // Get the movie name from the current index 'v' in 'characterMovieList'
   var currentMovie = characterMovieList[v].movieName;
   getMovieData(currentMovie);
+
+  // Increment the indices 'v' and 'questionNo'
   v++;
   questionNo++;
+
   questionNoEl.textContent = questionNo;
+  
   if(v == 19){
+    //if true hide quiz
     quiz.style.display = 'none'
+
+    //Display 'endpage element'
     endPage.style.display = 'block'
+
+    // Set the text content of 'scoreRn' to the current score
     scoreRn.textContent = score
+
+    // Calculate the percentage score and display it
     var percent = Math.round(score/19 *100)
     var temp =percent.toString();
     percentRn.textContent = temp;
+
+    // Retrieve and render the previous score
     localScore =renderPrevScore();
     scorePrev.textContent = localScore;
+
+    //Checks for previous Local Storage
     if(localScore == "N/A"){
       percentPrev.textContent = "N/A"
     }else{
+      // If false, calculate the percentage based on 'localScore' and update 'percentPrev'
       var percent2 = Math.round(localScore/19 * 100);
       percentPrev.textContent = percent2;
     }
     localStorage.setItem("Score",score);
   }
 }
+
+//Retrieves last Local Storage values
 function renderPrevScore() {
-  // TODO: Retrieve the last email and password and render it to the page
   var localScore = localStorage.getItem("Score")
   if (!localScore) {
     return "N/A";
@@ -125,6 +136,7 @@ function renderPrevScore() {
 // Add listener to submit element
 submitEl.addEventListener("click", showResponse);
 
+//Checks whether the input from user matches correct data received from API
 function getCharacterData(currentCharacter , nameOrImage){
 
   var url = 'https://api.disneyapi.dev/character/'+currentCharacter;
@@ -154,7 +166,7 @@ function getCharacterData(currentCharacter , nameOrImage){
             img.src = characterImage;
           }
       }); 
-  //console.log(characterName);                     
+                     
 }
 // Function to fetch for Movie Poster
 function getMovieData(currentMovie){
