@@ -1,5 +1,3 @@
-# project-1-team-6
-
 ## Disney Image Quiz Game
 
 ### Userstory
