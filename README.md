@@ -29,8 +29,8 @@ WHEN the README is accessed
 THEN the README should have a unique name, description, list of tech used, screenshots and links to the deployed website.
 
 
-Deployed URL: https://simonmoore23.github.io/Disney-Image-Quiz-Game/    
-GitHub Repo URL: https://github.com/simonmoore23/project-1-team-6   
+Deployed URL: https://simonmoore23.github.io/Disney-Image-Quiz-Game/
+GitHub Repo URL: https://github.com/simonmoore23/Disney-Image-Quiz-Game
 
 #### Description
 
