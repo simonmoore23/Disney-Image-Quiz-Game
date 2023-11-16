@@ -17,14 +17,15 @@ var valid = document.querySelector('#validation');
 var modal = document.querySelector("#modal1");
 var questionNoEl = document.querySelector("#questionNo");
 var quiz = document.querySelector("#quiz");
+var endPage = document.querySelector("#end-page")
 //var test = 0;
 var array = ["./assets/img/download.jpg", "./assets/img/download(1).jpg", "./assets/img/download(2).jpg"];
 var score = 0
 
 var characterMovieList = [
-  { characterName: "1540", movieName: "tt1691917"}, //Planes
+  { characterName: "1540", movieName: "tt1691917"},//Planes
   { characterName: "6749", movieName: "tt0076363"},//The Many Adventures of Winnie the Pooh
-  { characterName: "5195", movieName: "tt0275847"},// Lilo & Stitch
+  { characterName: "5195", movieName: "tt0275847"},//Lilo & Stitch
   { characterName: "5325", movieName: "tt0032910"},//Pinocchio
   { characterName: "1975", movieName: "tt0033563"},//Dumbo
   { characterName: "5117", movieName: "tt0046183"},//Peter Pan
@@ -37,7 +38,7 @@ var characterMovieList = [
   { characterName: "6160", movieName: "tt0110357"}, //The Lion King
   { characterName: "5379", movieName: "tt0114148"},//Pocahontas
   { characterName: "2389", movieName: "tt0119137"},//Flubber
-  { characterName: "2183", movieName: "tt0120762"},//Mulan
+  { characterName: "2183", movieName: "tt0120762"},//Fa Mulan
   { characterName: "6610", movieName: "tt0120855"},//Tarzan
   { characterName: "3631", movieName: "tt0328880"},//Brother Bear
   { characterName: "527", movieName: "tt2245084"}, //Big Hero 6
@@ -93,6 +94,7 @@ function showResponse(event) {
   console.log(v);
   if(v == 18){
     quiz.style.display = 'none'
+    endPage.style.display = 'block'
   }
 }
   
