@@ -7,3 +7,9 @@ img {
     height: 80px;
     width: auto;
   }
+
+@media screen and (max-width: 768px) {
+    #title {
+      font-size: 200%;
+    }
+}
